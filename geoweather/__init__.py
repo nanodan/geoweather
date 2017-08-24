@@ -89,3 +89,34 @@ def temperature_plot(
     
     # Add legend
     lg = ax.legend(loc='best',bbox_to_anchor=(1.235,0.95))
+    
+def geohash_to_polygon(df=None,mag_col_name=None,fileout_json=None,fileout_csv=None):
+  if df is not None and mag_col_name is not None and fileout_json is not None and fileout_csv is not None:
+    polygons_out = {'type':'FeatureCollection','features':[]}
+    for index, row in df.iterrows():
+      sw_lon = row['sw_lon']
+      sw_lat = row['sw_lat']
+      se_lat = row['se_lat']
+      se_lon = row['se_lon']
+      ne_lat = row['ne_lat']
+      ne_lon = row['ne_lon']
+      nw_lat = row['nw_lat']
+      nw_lon = row['nw_lon']
+      poly_points = [[sw_lon,sw_lat],[se_lon,se_lat],[ne_lon,ne_lat],[nw_lon,nw_lat]]
+      feature = {'type':'Feature',
+                 'properties':{'Temperature': row['AvgTemp']},
+                 'id':index,
+                 'geometry':{'type':'Polygon',
+                             'coordinates':[poly_points]}}
+      polygons_out['features'].append(feature)
+
+
+    geojson = json.dumps(polygons_out)
+    f = open(fileout_json,'w')
+    f.write(geojson)
+    f.close()
+
+    magnitudes = pd.DataFrame(df[mag_col_name])
+    magnitudes.to_csv(fileout_csv,index_label='id')
+  else:
+    return 'Error: Must pass all parameters to function'
