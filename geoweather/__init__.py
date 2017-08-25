@@ -90,7 +90,7 @@ def temperature_plot(
     ax2lab = ax2.set_ylabel(ylabel_right)
     
     # Add legend
-    lg = ax.legend(loc='best',bbox_to_anchor=(1.235,0.95))
+    lg = ax.legend(loc='best',bbox_to_anchor=(1.245,0.95))
     return ax
     
 def geohash_to_polygon(df=None,mag_col_name=None,fileout_json=None,fileout_csv=None):

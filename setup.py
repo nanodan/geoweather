@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='geoweather',
-      version='0.23',
+      version='0.24',
       description='Useful weather functions',
       url='http://github.com/nanodan/geoweather',
       author='Daniel J. Lewis',
