@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
+import json
+import pandas as pd
 
 def temperature_plot(
     x,y,counts,stdev=None,real_y=None,realmax=None,realmin=None,
@@ -89,6 +91,7 @@ def temperature_plot(
     
     # Add legend
     lg = ax.legend(loc='best',bbox_to_anchor=(1.235,0.95))
+    return ax
     
 def geohash_to_polygon(df=None,mag_col_name=None,fileout_json=None,fileout_csv=None):
   if df is not None and mag_col_name is not None and fileout_json is not None and fileout_csv is not None:
