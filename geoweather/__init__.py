@@ -107,7 +107,7 @@ def geohash_to_polygon(df=None,mag_col_name=None,fileout_json=None,fileout_csv=N
       nw_lon = row['nw_lon']
       poly_points = [[sw_lon,sw_lat],[se_lon,se_lat],[ne_lon,ne_lat],[nw_lon,nw_lat]]
       feature = {'type':'Feature',
-                 'properties':{'Temperature': row['AvgTemp']},
+                 'properties':{'Temperature': row[mag_col_name]},
                  'id':index,
                  'geometry':{'type':'Polygon',
                              'coordinates':[poly_points]}}
