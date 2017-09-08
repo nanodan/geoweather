@@ -46,12 +46,13 @@ def temperature_plot(
         pass
     else:
         return 'Error: y must be a numpy array or list'
-    if type(stdev) is np.ndarray:
-        stdev = list(stdev)
-    elif type(x) is list:
-        pass
-    else:
-        return 'Error: stdev must be a numpy array or list'
+    if stdev is not None:
+        if type(stdev) is np.ndarray:
+            stdev = list(stdev)
+        elif type(x) is list:
+            pass
+        else:
+            return 'Error: stdev must be a numpy array or list'
     if type(counts) is np.ndarray:
         counts = list(counts)
     elif type(x) is list:
@@ -66,12 +67,14 @@ def temperature_plot(
                 if i!=x[i]:
                     x = x[0:i] + [i] + x[i::]
                     y = y[0:i] + [None] + y[i::]
-                    stdev = stdev[0:i] + [None] + stdev[i::]
+                    if sdtev is not None:
+                        stdev = stdev[0:i] + [None] + stdev[i::]
                     counts = counts[0:i] + [None] + counts[i::]
             except IndexError:
                 x = x + [i]
                 y = y + [None]
-                stdev = stdev + [None]
+                if stdev is not None:
+                    stdev = stdev + [None]
                 counts = counts + [None]
                 break
     
