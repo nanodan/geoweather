@@ -32,41 +32,59 @@ def temperature_plot(
             realmax=realmax,realmin=realmin
             )
     """
-    
-    if type(y) is np.ndarray:
-        y = np.array(list(y),dtype=float)
-    elif type(y) is list:
-        y = np.array(y,dtype=float)
-    else:
-        return 'Error: y must be a list or numpy array'
-        
     if type(x) is np.ndarray:
-        x = np.array(list(x),dtype=float)
+        x = list(x)
     elif type(x) is list:
-        x = np.array(x,dtype=float)
+        pass
     else:
-        return 'Error: y must be a list or numpy array'
-        
+        return 'Error: x must be a numpy array or list'
+    if type(y) is np.ndarray:
+        y = list(y)
+    elif type(x) is list:
+        pass
+    else:
+        return 'Error: y must be a numpy array or list'
     if type(stdev) is np.ndarray:
-        stdev = np.array(list(stdev),dtype=float)
-    elif type(stdev) is list:
-        stdev = np.array(stdev,dtype=float)
+        stdev = list(stdev)
+    elif type(x) is list:
+        pass
     else:
-        return 'Error: stdev must be a list or numpy array'
-        
+        return 'Error: stdev must be a numpy array or list'
     if type(counts) is np.ndarray:
-        counts = np.array(list(counts),dtype=float)
-    elif type(stdev) is list:
-        counts = np.array(counts,dtype=float)
+        counts = list(counts)
+    elif type(x) is list:
+        pass
     else:
-        return 'Error: stdev must be a list or numpy array'
+        return 'Error: counts must be a numpy array or list'
+
+    while len(x)<24:
+        for i in range(0,24):
+            try:
+                x[i]
+                if i!=x[i]:
+                    x = x[0:i] + [i] + x[i::]
+                    y = y[0:i] + [None] + y[i::]
+                    stdev = stdev[0:i] + [None] + stdev[i::]
+                    counts = counts[0:i] + [None] + counts[i::]
+                break
+            except IndexError:
+                x = x + [i]
+                y = y + [None]
+                stdev = stdev + [None]
+                counts = counts + [None]
+                break
+    
+    y = np.array(list(y),dtype=float)
+    x = np.array(list(x),dtype=float)
+    stdev = np.array(list(stdev),dtype=float)
+    counts = np.array(list(counts),dtype=float)
     
     if type(real_y) is np.ndarray:
         real_y = np.array(list(real_y),dtype=float)
     elif type(stdev) is list:
         real_y = np.array(real_y,dtype=float)
     else:
-        return 'Error: stdev must be a list or numpy array'
+        return 'Error: real_y must be a list or numpy array'
     
     # Default is celcius left axis, and fahrenheit on right: switch_y swaps this
     if switch_y:
