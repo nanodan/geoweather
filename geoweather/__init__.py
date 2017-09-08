@@ -84,12 +84,13 @@ def temperature_plot(
         stdev = np.array(list(stdev),dtype=float)
     counts = np.array(list(counts),dtype=float)
     
-    if type(real_y) is np.ndarray:
-        real_y = np.array(list(real_y),dtype=float)
-    elif type(stdev) is list:
-        real_y = np.array(real_y,dtype=float)
-    else:
-        return 'Error: real_y must be a list or numpy array'
+    if real_y is not None:
+        if type(real_y) is np.ndarray:
+            real_y = np.array(list(real_y),dtype=float)
+        elif type(stdev) is list:
+            real_y = np.array(real_y,dtype=float)
+        else:
+            return 'Error: real_y must be a list or numpy array'
     
     # Default is celcius left axis, and fahrenheit on right: switch_y swaps this
     if switch_y:
