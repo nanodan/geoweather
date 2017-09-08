@@ -40,6 +40,8 @@ def temperature_plot(
     if stdev is not None:
         ydevup = y + stdev
         ydevdown = y - stdev
+        ydev = ydevup + ydevdown
+        xdev = x + x
     if realmax is not None and realmin is not None:
         realmax_list = realmax*np.ones(len(x))
         realmin_list = realmin*np.ones(len(x))
@@ -48,8 +50,8 @@ def temperature_plot(
     
     try:
         # If including stdev, plot upper and lower bounds
-        ax.plot(x,ydevup,'g--',linewidth=1,zorder=3,label=stdev_label)
-        ax.plot(x,ydevdown,'g--',linewidth=1,zorder=3)
+        ax.plot(xdev,ydev,'g--',linewidth=1,zorder=3,label=stdev_label)
+        # ax.plot(x,ydevdown,'g--',linewidth=1,zorder=3)
     except NameError:
         pass
     
