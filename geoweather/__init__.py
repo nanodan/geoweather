@@ -68,7 +68,6 @@ def temperature_plot(
                     y = y[0:i] + [None] + y[i::]
                     stdev = stdev[0:i] + [None] + stdev[i::]
                     counts = counts[0:i] + [None] + counts[i::]
-                break
             except IndexError:
                 x = x + [i]
                 y = y + [None]
