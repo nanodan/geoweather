@@ -17,10 +17,12 @@ def temperature_plot(
     
     x, y, and counts are required, all other keyword arguments are optional.
     
+    You can pass in x,y,stdev,real_y and counts as lists or numpy arrays.
+    
     Example usage:
         y = np.array(df['Temperature'])
         real_y = np.array(df_real['Temperature'])
-        x = np.array(df['Hour'])
+        x = df['Hour'].tolist()
         stdev = np.array(df['Stdev'])
         realmax = 30
         realmin = 15
@@ -30,6 +32,41 @@ def temperature_plot(
             realmax=realmax,realmin=realmin
             )
     """
+    
+    if type(y) is np.ndarray:
+        y = np.array(list(y),dtype=float)
+    elif type(y) is list:
+        y = np.array(y,dtype=float)
+    else:
+        return 'Error: y must be a list or numpy array'
+        
+    if type(x) is np.ndarray:
+        x = np.array(list(x),dtype=float)
+    elif type(x) is list:
+        x = np.array(x,dtype=float)
+    else:
+        return 'Error: y must be a list or numpy array'
+        
+    if type(stdev) is np.ndarray:
+        stdev = np.array(list(stdev),dtype=float)
+    elif type(stdev) is list:
+        stdev = np.array(stdev,dtype=float)
+    else:
+        return 'Error: stdev must be a list or numpy array'
+        
+    if type(counts) is np.ndarray:
+        counts = np.array(list(counts),dtype=float)
+    elif type(stdev) is list:
+        counts = np.array(counts,dtype=float)
+    else:
+        return 'Error: stdev must be a list or numpy array'
+    
+    if type(real_y) is np.ndarray:
+        real_y = np.array(list(real_y),dtype=float)
+    elif type(stdev) is list:
+        real_y = np.array(real_y,dtype=float)
+    else:
+        return 'Error: stdev must be a list or numpy array'
     
     # Default is celcius left axis, and fahrenheit on right: switch_y swaps this
     if switch_y:
