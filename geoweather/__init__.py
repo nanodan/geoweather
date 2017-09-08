@@ -21,6 +21,9 @@ def temperature_plot(
     you are missing certain hours from x, the function will automatically add
     them and fill stdev, counts, and y with NoneType values to fill the plot.
     
+    switch_y = True will set Fahrenheit left axis and Celcius right
+    switch_y = False will set Celcius left axis and Fahrenheit right
+    
     Example usage:
         y = np.array(df['Temperature'])
         real_y = np.array(df_real['Temperature'])
