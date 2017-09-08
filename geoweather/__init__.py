@@ -17,7 +17,9 @@ def temperature_plot(
     
     x, y, and counts are required, all other keyword arguments are optional.
     
-    You can pass in x,y,stdev,real_y and counts as lists or numpy arrays.
+    You can pass in x,y,stdev,real_y and counts as lists or numpy arrays. If
+    you are missing certain hours from x, the function will automatically add
+    them and fill stdev, counts, and y with NoneType values to fill the plot.
     
     Example usage:
         y = np.array(df['Temperature'])
