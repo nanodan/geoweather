@@ -80,7 +80,8 @@ def temperature_plot(
     
     y = np.array(list(y),dtype=float)
     x = np.array(list(x),dtype=float)
-    stdev = np.array(list(stdev),dtype=float)
+    if stdev is not None:
+        stdev = np.array(list(stdev),dtype=float)
     counts = np.array(list(counts),dtype=float)
     
     if type(real_y) is np.ndarray:
